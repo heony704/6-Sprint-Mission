@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { getProducts } from "../../api";
 import ProductCard from "../ProductCard";
 import Button from "../Button";
@@ -20,6 +20,52 @@ const ORDERS = [
 ];
 
 function AllProducts() {
+  const mqlDesktop = window.matchMedia("(min-width: 1200px)");
+  const mqlTablet = window.matchMedia(
+    "(min-width: 768px) and (max-width: 1199px)"
+  );
+
+  function getProductsPerPage(screenSize) {
+    switch (screenSize) {
+      case "desktop":
+        return 10;
+      case "tablet":
+        return 6;
+      case "mobile":
+        return 4;
+      default:
+        return 10;
+    }
+  }
+
+  const getScreenSize = useCallback(() => {
+    const screenSize = mqlDesktop.matches
+      ? "desktop"
+      : mqlTablet.matches
+      ? "tablet"
+      : "mobile";
+
+    return screenSize;
+  }, [mqlDesktop.matches, mqlTablet.matches]);
+
+  const [numberOfProducts, setNumberOfProducts] = useState(() => {
+    const screenSize = getScreenSize();
+    const productsPerPage = getProductsPerPage(screenSize);
+    return productsPerPage;
+  });
+
+  const handleMediaQueryChange = useCallback(() => {
+    const screenSize = getScreenSize();
+    const productsPerPage = getProductsPerPage(screenSize);
+
+    setNumberOfProducts(productsPerPage);
+  }, [getScreenSize]);
+
+  useEffect(() => {
+    mqlDesktop.addEventListener("change", handleMediaQueryChange);
+    mqlTablet.addEventListener("change", handleMediaQueryChange);
+  }, [mqlDesktop, mqlTablet, handleMediaQueryChange]);
+
   const [products, setProducts] = useState([]);
 
   const [order, setOrder] = useState(ORDERS[0]);
@@ -28,13 +74,14 @@ function AllProducts() {
     setOrder(option);
   };
 
-  const loadProducts = async (order) => {
-    const allProducts = await getProducts(order, 10);
+  const loadProducts = async (order, size) => {
+    const allProducts = await getProducts(order, size);
     setProducts(allProducts);
   };
 
   useEffect(() => {
-    loadProducts(order.orderBy);
+    const size = getProductsPerPage("desktop");
+    loadProducts(order.orderBy, size);
   }, [order]);
 
   return (
@@ -62,7 +109,7 @@ function AllProducts() {
         </div>
       </div>
       <ul className="all-product-list">
-        {products.map((product) => (
+        {products.slice(0, numberOfProducts).map((product) => (
           <li key={product.id}>
             <ProductCard type="small" product={product} />
           </li>
