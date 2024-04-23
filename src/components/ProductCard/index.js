@@ -4,7 +4,7 @@ function ProductCard({ type = "big", product }) {
   const { name, images, price, favoriteCount } = product;
 
   return (
-    <div className={`product-card ${type}`}>
+    <div className="product-card">
       <img
         className={`product-card-image ${type}`}
         src={images[0]}
