@@ -3,6 +3,7 @@ import { getProducts } from "../../api";
 import ProductCard from "../ProductCard";
 import Button from "../Button";
 import DropDown from "../DropDown";
+import Pagination from "../Pagination";
 import { PAGES } from "../../constants/paths";
 import "./index.css";
 
@@ -111,6 +112,7 @@ function AllProducts() {
           </li>
         ))}
       </ul>
+      <Pagination />
     </section>
   );
 }

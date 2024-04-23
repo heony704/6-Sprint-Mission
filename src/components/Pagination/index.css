@@ -1,0 +1,31 @@
+.pagination {
+  display: flex;
+  gap: 4px;
+  margin: 0 auto;
+}
+
+.pagination-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--gray200);
+  border-radius: 40px;
+  background-color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gray500);
+  cursor: pointer;
+}
+
+.pagination-button.selected {
+  border: 1px solid var(--primary400);
+  background-color: var(--primary400);
+  color: white;
+}
+
+.pagination-button .icon {
+  width: 16px;
+  height: 16px;
+}
