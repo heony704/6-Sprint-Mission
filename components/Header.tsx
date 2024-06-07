@@ -4,18 +4,21 @@ import { useRouter } from 'next/router';
 
 import Button from './Button';
 
-type Path = {
+type Nav = {
   url: string;
+  matchPattern: RegExp;
   navName: string;
 };
 
-const PATHS: Path[] = [
+const NAVS: Nav[] = [
   {
-    url: '/community',
+    url: '/boards',
+    matchPattern: /^\/boards(\/\d+)?$|^\/addboard$/,
     navName: '자유게시판',
   },
   {
     url: '/products',
+    matchPattern: /^\/products(\/\d+)?$/,
     navName: '중고마켓',
   },
 ];
@@ -46,12 +49,12 @@ export default function Header() {
         </Link>
         <nav className="grow">
           <ul className="flex">
-            {PATHS.map((path) => (
+            {NAVS.map((nav) => (
               <li
-                className={`${asPath === path.url ? 'text-primary-400 hover:text-primary-600 active:text-primary-700' : 'text-gray-600 hover:text-gray-800 active:text-gray-900'} w-[108px] text-center text-lg font-bold`}
-                key={path.url}
+                className={`${nav.matchPattern.test(asPath) ? 'text-primary-400 hover:text-primary-600 active:text-primary-700' : 'text-gray-600 hover:text-gray-800 active:text-gray-900'} w-[108px] text-center text-lg font-bold`}
+                key={nav.url}
               >
-                <Link href={path.url}>{path.navName}</Link>
+                <Link href={nav.url}>{nav.navName}</Link>
               </li>
             ))}
           </ul>
