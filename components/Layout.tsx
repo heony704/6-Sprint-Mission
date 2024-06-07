@@ -8,7 +8,7 @@ export default function Layout({ children }: Props) {
   return (
     <>
       <Header />
-      {children}
+      <div className="mt-[70px]">{children}</div>
     </>
   );
 }
