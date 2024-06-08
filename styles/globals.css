@@ -16,4 +16,5 @@ body {
 
 pre {
   text-wrap: wrap;
+  font-family: var(--global-font);
 }
