@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import Header from './Header';
 
 type Props = {
@@ -5,6 +7,10 @@ type Props = {
 };
 
 export default function Layout({ children }: Props) {
+  const { asPath } = useRouter();
+
+  if (['/signin', '/singup'].includes(asPath)) return;
+
   return (
     <>
       <Header />
