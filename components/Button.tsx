@@ -1,11 +1,13 @@
+import { MouseEventHandler, ReactNode } from 'react';
+
 type Props = {
   style?: {
     shape?: 'square' | 'rounded';
     size?: 'small' | 'large';
   };
   disabled?: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
+  onClick: MouseEventHandler<HTMLButtonElement>;
+  children: ReactNode;
 };
 
 export default function Button({
