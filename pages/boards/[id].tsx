@@ -69,7 +69,7 @@ export default function BoardItem() {
       <div className="mt-10 md:mt-16">
         <CommentForm boardId={id} />
       </div>
-      <div className="mt-4 flex flex-col gap-4 md:mt-6">
+      <div className="flex flex-col">
         {comments?.map((comment) => (
           <Comment key={comment.id} comment={comment} />
         ))}
@@ -180,7 +180,7 @@ type CommentProp = {
 function Comment({ comment }: CommentProp) {
   const { content, createdAt, writer } = comment;
   return (
-    <div className="relative flex flex-col border-b pb-4 md:pb-6">
+    <div className="relative mt-4 flex flex-col border-b pb-4 md:mt-6 md:pb-6">
       <Image
         src="/ic_kebab.svg"
         width={24}
