@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import Footer from './Footer';
 import Header from './Header';
 
 type Props = {
@@ -16,6 +17,7 @@ export default function Layout({ children }: Props) {
       <>
         <Header />
         <main className={`mt-[70px]`}>{children}</main>
+        <Footer />
       </>
     );
   }
