@@ -64,9 +64,9 @@ export default function BoardItem() {
   if (!board) return;
 
   return (
-    <main className="m-auto px-4 pb-24 pt-8 md:px-6 xl:max-w-[1200px] xl:px-0">
+    <main className="m-auto px-4 pb-24 pt-8 tablet:px-6 desktop:max-w-[1200px] desktop:px-0">
       <BoardDetail board={board} />
-      <div className="mt-10 md:mt-16">
+      <div className="mt-10 tablet:mt-16">
         <CommentForm boardId={id} />
       </div>
       <div className="flex flex-col">
@@ -180,7 +180,7 @@ type CommentProp = {
 function Comment({ comment }: CommentProp) {
   const { content, createdAt, writer } = comment;
   return (
-    <div className="relative mt-4 flex flex-col border-b pb-4 md:mt-6 md:pb-6">
+    <div className="relative mt-4 flex flex-col border-b pb-4 tablet:mt-6 tablet:pb-6">
       <Image
         src="/ic_kebab.svg"
         width={24}
@@ -189,7 +189,7 @@ function Comment({ comment }: CommentProp) {
         alt="댓글 메뉴 아이콘"
       />
       <p className="text-sm font-normal text-gray-800">{content}</p>
-      <div className="mt-4 flex items-center md:mt-6">
+      <div className="mt-4 flex items-center tablet:mt-6">
         <Image
           src={writer.image ?? '/img_default_profile.svg'}
           width={32}
