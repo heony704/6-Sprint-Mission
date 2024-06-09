@@ -27,22 +27,22 @@ const SOCIALS: Social[] = [
   {
     name: '페이스북',
     url: 'https://www.facebook.com/',
-    iconSrc: '/ic_facebook.svg',
+    iconSrc: '/images/ic_facebook.svg',
   },
   {
     name: '트위터',
     url: 'https://twitter.com/?lang=ko',
-    iconSrc: '/ic_twitter.svg',
+    iconSrc: '/images/ic_twitter.svg',
   },
   {
     name: '유튜브',
     url: 'https://www.youtube.com/',
-    iconSrc: '/ic_youtube.svg',
+    iconSrc: '/images/ic_youtube.svg',
   },
   {
     name: '인스타그램',
     url: 'https://www.instagram.com/',
-    iconSrc: '/ic_instagram.svg',
+    iconSrc: '/images/ic_instagram.svg',
   },
 ];
 

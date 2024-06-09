@@ -31,7 +31,7 @@ export default function Layout({ children }: Props) {
               width={198}
               height={66}
               className="tablet:h-[132px] tablet:w-[396px]"
-              src="/logo_big.svg"
+              src="/images/logo_big.svg"
               alt="판다마켓 로고"
               priority
             />

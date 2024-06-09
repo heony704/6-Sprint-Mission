@@ -34,7 +34,7 @@ export default function Header() {
             width={81}
             height={40}
             className="block tablet:hidden"
-            src="/logo_small.svg"
+            src="/images/logo_small.svg"
             alt="판다마켓 로고"
             priority
           />
@@ -42,7 +42,7 @@ export default function Header() {
             width={153}
             height={51}
             className="hidden tablet:block"
-            src="/logo_big.svg"
+            src="/images/logo_big.svg"
             alt="판다마켓 로고"
             priority
           />

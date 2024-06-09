@@ -92,7 +92,7 @@ function BoardDetail({ board }: BoardDetailProp) {
     <div className="flex flex-col gap-4">
       <div className="relative flex flex-col gap-4 border-b">
         <Image
-          src="/ic_kebab.svg"
+          src="/images/ic_kebab.svg"
           width={24}
           height={24}
           className="absolute right-0 top-0"
@@ -102,7 +102,7 @@ function BoardDetail({ board }: BoardDetailProp) {
         <div className="mb-4 flex">
           <div className="flex items-center gap-2 pr-4">
             <Image
-              src="/img_default_profile.svg"
+              src="/images/img_default_profile.svg"
               width={24}
               height={24}
               alt="글쓴이 프로필 이미지"
@@ -116,7 +116,7 @@ function BoardDetail({ board }: BoardDetailProp) {
           </div>
           <div className="flex items-center border-l pl-4">
             <Image
-              src={`${isLiked ? '/ic_heart_full.svg' : '/ic_heart_empty.svg'}`}
+              src={`${isLiked ? '/images/ic_heart_full.svg' : '/images/ic_heart_empty.svg'}`}
               width={24}
               height={24}
               alt={`${isLiked ? '꽉찬 하트' : '빈 하트'}`}
@@ -182,7 +182,7 @@ function Comment({ comment }: CommentProp) {
   return (
     <div className="relative mt-4 flex flex-col border-b pb-4 tablet:mt-6 tablet:pb-6">
       <Image
-        src="/ic_kebab.svg"
+        src="/images/ic_kebab.svg"
         width={24}
         height={24}
         className="absolute right-0 top-0"
@@ -191,7 +191,7 @@ function Comment({ comment }: CommentProp) {
       <p className="text-sm font-normal text-gray-800">{content}</p>
       <div className="mt-4 flex items-center tablet:mt-6">
         <Image
-          src={writer.image ?? '/img_default_profile.svg'}
+          src={writer.image ?? '/images/img_default_profile.svg'}
           width={32}
           height={32}
           className="max-h-8 rounded-full"
@@ -220,7 +220,7 @@ function BackButton() {
     >
       목록으로 돌아가기
       <Image
-        src="/ic_back.svg"
+        src="/images/ic_back.svg"
         width={24}
         height={24}
         className="ml-[10px]"
