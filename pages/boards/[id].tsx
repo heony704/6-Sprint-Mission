@@ -64,7 +64,7 @@ export default function BoardItem() {
   if (!board) return;
 
   return (
-    <main className="m-auto px-4 pb-24 pt-8 tablet:px-6 desktop:max-w-[1200px] desktop:px-0">
+    <>
       <BoardDetail board={board} />
       <div className="mt-10 tablet:mt-16">
         <CommentForm boardId={id} />
@@ -77,7 +77,7 @@ export default function BoardItem() {
       <div className="mt-10 flex justify-center">
         <BackButton />
       </div>
-    </main>
+    </>
   );
 }
 
