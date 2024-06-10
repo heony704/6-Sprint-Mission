@@ -51,7 +51,7 @@ export default function Header() {
           <ul className="flex">
             {NAVS.map((nav) => (
               <li
-                className={`${nav.matchPattern.test(asPath) ? 'text-primary-400 hover:text-primary-600 active:text-primary-700' : 'text-gray-600 hover:text-gray-800 active:text-gray-900'} w-[108px] text-center text-lg font-bold`}
+                className={`${nav.matchPattern.test(asPath) ? 'text-primary-400 hover:text-primary-600 active:text-primary-700' : 'text-gray-600 hover:text-gray-800 active:text-gray-900'} w-[108px] text-center text-lg font-bold leading-none`}
                 key={nav.url}
               >
                 <Link href={nav.url}>{nav.navName}</Link>
