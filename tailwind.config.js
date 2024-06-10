@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     screens: {
       tablet: '768px',
-      desktop: '1440px',
+      desktop: '1280px',
     },
     extend: {
       colors: {
