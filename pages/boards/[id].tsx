@@ -69,11 +69,15 @@ export default function BoardItem() {
       <div className="mt-10 tablet:mt-16">
         <CommentForm boardId={id} />
       </div>
-      <div className="flex flex-col">
-        {comments?.map((comment) => (
-          <Comment key={comment.id} comment={comment} />
-        ))}
-      </div>
+      {comments !== undefined && comments.length < 1 ? (
+        <EmptyComment />
+      ) : (
+        <div className="flex flex-col">
+          {comments?.map((comment) => (
+            <Comment key={comment.id} comment={comment} />
+          ))}
+        </div>
+      )}
       <div className="mt-10 flex justify-center">
         <BackButton />
       </div>
@@ -169,6 +173,23 @@ function CommentForm({ boardId }: CommentFormProp) {
           등록
         </Button>
       </div>
+    </div>
+  );
+}
+
+function EmptyComment() {
+  return (
+    <div className="mt-5 flex flex-col items-center justify-center">
+      <Image
+        src="/images/img_reply_empty.svg"
+        width={140}
+        height={140}
+        alt="말풍선 아이콘"
+      />
+      <p className="text-base font-normal text-gray-400">아직 댓글이 없어요,</p>
+      <p className="text-base font-normal text-gray-400">
+        지금 댓글을 달아보세요!
+      </p>
     </div>
   );
 }
