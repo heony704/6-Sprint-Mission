@@ -18,3 +18,8 @@ pre {
   text-wrap: wrap;
   font-family: var(--global-font);
 }
+
+input:focus,
+textarea:focus {
+  outline: 2px solid theme('colors.primary.400');
+}
