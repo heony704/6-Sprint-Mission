@@ -7,7 +7,7 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'sprint-fe-project.s3.ap-northeast-2.amazonaws.com',
         port: '',
-        pathname: '/Sprint_Mission/user/**',
+        pathname: '/**',
       },
       // FIXME: 오류를 피하기 위한 임시 허용
       {
