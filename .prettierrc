@@ -12,10 +12,11 @@
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
 
-    "^@apis/(.*)$",
-    "^@hooks/(.*)$",
-    "^@components/(.*)$",
-    "^@utils/(.*)$",
+    "^@/apis/(.*)$",
+    "^@/hooks/(.*)$",
+    "^@/components/(.*)$",
+    "^@/utils/(.*)$",
+    "^@/types/(.*)$",
 
     "^[./]"
   ],

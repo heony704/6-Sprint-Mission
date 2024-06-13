@@ -1,9 +1,9 @@
-import '@styles/globals.css';
+import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import localFont from 'next/font/local';
 import Head from 'next/head';
 
-import Layout from '@components/Layout';
+import Layout from '@/components/Layout';
 
 const pretendard = localFont({
   src: '../public/fonts/PretendardVariable.woff2',
