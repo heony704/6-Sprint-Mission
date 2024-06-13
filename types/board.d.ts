@@ -1,11 +1,5 @@
-interface Writer {
-  id: number;
-  nickname: string;
-}
-
-interface WriterWithImage extends Writer {
-  image: string | null;
-}
+import { Comment } from './comment';
+import { Writer } from './writer';
 
 export interface Board {
   id: number;
@@ -22,10 +16,4 @@ export interface BoardWithLiked extends Board {
   isLiked: boolean;
 }
 
-export interface BoardComment {
-  id: number;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-  writer: WriterWithImage;
-}
+export { Comment as BoardComment };
