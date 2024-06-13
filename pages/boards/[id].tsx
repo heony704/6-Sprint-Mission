@@ -48,11 +48,16 @@ export default function BoardItem() {
       {comments !== undefined && comments.length < 1 ? (
         <EmptyComment />
       ) : (
-        <div className="flex flex-col">
-          {comments?.map((comment) => (
-            <Comment key={comment.id} comment={comment} />
+        <ul className="flex flex-col">
+          {comments?.map((comment, index) => (
+            <li key={comment.id}>
+              <Comment comment={comment} />
+              {index !== comments.length - 1 && (
+                <hr className="border-gray-200" />
+              )}
+            </li>
           ))}
-        </div>
+        </ul>
       )}
       <div className="mt-10 flex justify-center">
         <BackButton />
@@ -176,8 +181,9 @@ type CommentProp = {
 
 function Comment({ comment }: CommentProp) {
   const { content, createdAt, writer } = comment;
+
   return (
-    <div className="relative mt-4 flex flex-col border-b pb-4 tablet:mt-6 tablet:pb-6">
+    <div className="relative my-4 flex flex-col tablet:my-6">
       <Image
         src="/images/ic_kebab.svg"
         width={24}
