@@ -11,35 +11,11 @@ import {
   formatDateToYYYYMMDD,
 } from '@utils/formatDateToString';
 
-interface Writer {
-  id: number;
-  nickname: string;
-  image?: string;
-}
-
-interface Board {
-  id: number;
-  title: string;
-  content: string;
-  image: string;
-  isLiked: boolean;
-  likeCount: number;
-  createdAt: string;
-  updatedAt: string;
-  writer: Writer;
-}
-
-interface Comment {
-  id: number;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-  writer: Writer;
-}
+import { BoardComment, BoardWithLiked } from '../../types/board';
 
 export default function BoardItem() {
-  const [board, setBoard] = useState<Board | undefined>();
-  const [comments, setComments] = useState<Comment[] | undefined>();
+  const [board, setBoard] = useState<BoardWithLiked | undefined>();
+  const [comments, setComments] = useState<BoardComment[] | undefined>();
 
   const { isReady, query } = useRouter();
   const id = Number(query.id);
@@ -48,12 +24,12 @@ export default function BoardItem() {
     if (!isReady) return;
 
     const loadBoardData = async (boardId: number) => {
-      const boardData: Board = await getBoardById(boardId);
+      const boardData: BoardWithLiked = await getBoardById(boardId);
       setBoard(boardData);
     };
 
     const loadCommentsData = async (boardId: number) => {
-      const CommentsData: Comment[] = await getBoardComments(boardId);
+      const CommentsData: BoardComment[] = await getBoardComments(boardId);
       setComments(CommentsData);
     };
 
@@ -86,7 +62,7 @@ export default function BoardItem() {
 }
 
 type BoardDetailProp = {
-  board: Board;
+  board: BoardWithLiked;
 };
 
 function BoardDetail({ board }: BoardDetailProp) {
@@ -195,7 +171,7 @@ function EmptyComment() {
 }
 
 type CommentProp = {
-  comment: Comment;
+  comment: BoardComment;
 };
 
 function Comment({ comment }: CommentProp) {
