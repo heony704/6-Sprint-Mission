@@ -49,14 +49,13 @@ export default function BoardItem() {
   return (
     <>
       <BoardDetail board={board} />
-      <div className="mt-10 tablet:mt-16">
-        <div className="flex flex-col gap-4">
-          <h3 className="text-base font-semibold text-gray-800">댓글 달기</h3>
-          <CommentForm
-            placeholder="댓글을 입력해주세요."
-            onSubmit={handleCommentFormSubmit}
-          />
-        </div>
+      <hr className="my-4 text-gray-200 tablet:my-6 desktop:my-8" />
+      <div className="flex flex-col gap-4">
+        <h3 className="text-base font-semibold text-gray-800">댓글 달기</h3>
+        <CommentForm
+          placeholder="댓글을 입력해주세요."
+          onSubmit={handleCommentFormSubmit}
+        />
       </div>
       <div className="mt-5">
         {comments !== undefined && comments.length < 1 ? (
