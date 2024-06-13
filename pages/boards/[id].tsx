@@ -1,15 +1,14 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { getBoardById, getBoardComments, postBoardComment } from '@/apis/board';
 
-import Button from '@/components/Button';
+import BackButton from '@/components/BackButton';
+import Comment from '@/components/Comment';
+import CommentForm from '@/components/CommentForm';
 
-import {
-  formatDateToTimeAgo,
-  formatDateToYYYYMMDD,
-} from '@/utils/formatDateToString';
+import { formatDateToYYYYMMDD } from '@/utils/formatDateToString';
 
 import { BoardComment, BoardWithLiked } from '@/types/board';
 
@@ -19,6 +18,14 @@ export default function BoardItem() {
 
   const { isReady, query } = useRouter();
   const id = Number(query.id);
+
+  const handleCommentFormSubmit = async (inputValue: string) => {
+    try {
+      await postBoardComment(id, inputValue);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (!isReady) return;
@@ -43,24 +50,32 @@ export default function BoardItem() {
     <>
       <BoardDetail board={board} />
       <div className="mt-10 tablet:mt-16">
-        <CommentForm boardId={id} />
+        <div className="flex flex-col gap-4">
+          <h3 className="text-base font-semibold text-gray-800">댓글 달기</h3>
+          <CommentForm
+            placeholder="댓글을 입력해주세요."
+            onSubmit={handleCommentFormSubmit}
+          />
+        </div>
       </div>
-      {comments !== undefined && comments.length < 1 ? (
-        <EmptyComment />
-      ) : (
-        <ul className="flex flex-col">
-          {comments?.map((comment, index) => (
-            <li key={comment.id}>
-              <Comment comment={comment} />
-              {index !== comments.length - 1 && (
-                <hr className="border-gray-200" />
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
+      <div className="mt-5">
+        {comments !== undefined && comments.length < 1 ? (
+          <EmptyComment />
+        ) : (
+          <ul className="flex flex-col">
+            {comments?.map((comment, index) => (
+              <li key={comment.id}>
+                <Comment comment={comment} />
+                {index !== comments.length - 1 && (
+                  <hr className="border-gray-200" />
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
       <div className="mt-10 flex justify-center">
-        <BackButton />
+        <BackButton to="/boards" />
       </div>
     </>
   );
@@ -117,50 +132,9 @@ function BoardDetail({ board }: BoardDetailProp) {
   );
 }
 
-type CommentFormProp = {
-  boardId: number;
-};
-
-function CommentForm({ boardId }: CommentFormProp) {
-  const [value, setValue] = useState<string>('');
-
-  const handleTextareaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(e.target.value);
-  };
-
-  const handleButtonClick = async () => {
-    try {
-      await postBoardComment(boardId, value);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  return (
-    <div className="flex flex-col gap-4">
-      <h3 className="text-base font-semibold text-gray-800">댓글 달기</h3>
-      <textarea
-        className="h-[104px] resize-none rounded-xl bg-gray-100 px-6 py-4 text-base font-normal text-gray-800 placeholder:text-gray-400"
-        placeholder="댓글을 입력해주세요."
-        value={value}
-        onChange={handleTextareaChange}
-      />
-      <div className="flex justify-end">
-        <Button
-          style={{ shape: 'square', size: 'small' }}
-          disabled={value === ''}
-          onClick={handleButtonClick}
-        >
-          등록
-        </Button>
-      </div>
-    </div>
-  );
-}
-
 function EmptyComment() {
   return (
-    <div className="mt-5 flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center">
       <Image
         src="/images/img_reply_empty.svg"
         width={140}
@@ -172,63 +146,5 @@ function EmptyComment() {
         지금 댓글을 달아보세요!
       </p>
     </div>
-  );
-}
-
-type CommentProp = {
-  comment: BoardComment;
-};
-
-function Comment({ comment }: CommentProp) {
-  const { content, createdAt, writer } = comment;
-
-  return (
-    <div className="relative my-4 flex flex-col tablet:my-6">
-      <Image
-        src="/images/ic_kebab.svg"
-        width={24}
-        height={24}
-        className="absolute right-0 top-0"
-        alt="댓글 메뉴 아이콘"
-      />
-      <p className="text-sm font-normal text-gray-800">{content}</p>
-      <div className="mt-4 flex items-center tablet:mt-6">
-        <Image
-          src={writer.image ?? '/images/img_default_profile.svg'}
-          width={32}
-          height={32}
-          className="max-h-8 rounded-full"
-          alt="댓글쓴이 프로필 이미지"
-        />
-        <div className="ml-2 flex flex-col">
-          <p className="text-xs font-normal text-gray-600">{writer.nickname}</p>
-          <p className="text-xs font-normal text-gray-400">
-            {formatDateToTimeAgo(new Date(createdAt))}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function BackButton() {
-  const { push } = useRouter();
-
-  return (
-    <Button
-      style={{ shape: 'rounded', size: 'large' }}
-      onClick={() => {
-        push('/boards');
-      }}
-    >
-      목록으로 돌아가기
-      <Image
-        src="/images/ic_back.svg"
-        width={24}
-        height={24}
-        className="ml-[10px]"
-        alt="뒤로가기 아이콘"
-      />
-    </Button>
   );
 }
